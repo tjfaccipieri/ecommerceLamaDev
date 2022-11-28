@@ -17,8 +17,14 @@ function Card({ item }: CardProps) {
         </div>
         <h2>{item.title}</h2>
         <div className="prices">
-          <h3>{item.oldPrice}</h3>
-          <h3>{item.price}</h3>
+          <s className='oldPrice'><h3>{new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+          }).format(item.oldPrice)}</h3></s>
+          <h3>{new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+          }).format(item.price)}</h3>
         </div>
       </div>
     </Link>

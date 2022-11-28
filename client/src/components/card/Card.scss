@@ -1,5 +1,5 @@
 .card {
-  width: 280px;
+  width: clamp(200px, 15vw, 280px);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -38,6 +38,24 @@
       border-radius: 4px;
       font-weight: 600;
       font-size: 0.875rem;
+    }
+
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    height: 1.5rem;
+    letter-spacing: 2px;
+  }
+  .prices {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    color: var(--accent);
+
+    .oldPrice {
+      color: var(--secondary);
+      font-size: 14px;
     }
   }
 }

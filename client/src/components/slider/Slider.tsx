@@ -31,10 +31,10 @@ function Slider() {
 
       <div className="icons">
         <div className="icon" onClick={prevSlide}>
-        <CaretLeft size={26} />
+        <CaretLeft size={26} weight='bold' />
         </div>
         <div className="icon" onClick={nextSlide}>
-        <CaretRight size={26} />
+        <CaretRight size={26} weight='bold' />
         </div>
       </div>
     </div>
