@@ -1,0 +1,19 @@
+:root {
+  --gray-400: #808080;
+  --accent: #2879fe;
+  --offwhite: #fcfcfc;
+}
+
+body {
+  margin: 0;
+}
+
+
+.app {
+  font-family: 'Inter', sans-serif;
+
+  .link {
+    color: inherit;
+    text-decoration: none;
+  }
+}

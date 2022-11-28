@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import Product from "./pages/product/Product";
 import Products from "./pages/products/Products";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+import './App.scss'
 
 const Layout = () => {
   return (
