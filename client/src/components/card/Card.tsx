@@ -21,9 +21,9 @@ function Card({ item }: CardProps) {
             style: 'currency',
             currency: 'USD'
           }).format(item.oldPrice)}</h3></s>
-          <h3>{new Intl.NumberFormat('en-US', {
+          <h3>{new Intl.NumberFormat('pt-br', {
             style: 'currency',
-            currency: 'USD'
+            currency: 'BRL'
           }).format(item.price)}</h3>
         </div>
       </div>

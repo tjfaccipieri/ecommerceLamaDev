@@ -1,12 +1,8 @@
 import React from 'react'
-import Card from '../card/Card'
-import './FeaturedProducts.scss'
+import './List.scss'
+import Card from '../card/Card';
 
-interface FeaturedProps {
-  type: string
-}
-
-function FeaturedProducts({type}: FeaturedProps) {
+function List() {
 
   const data = [
     {
@@ -45,18 +41,12 @@ function FeaturedProducts({type}: FeaturedProps) {
   ]
 
   return (
-    <div className='featuredProducts'>
-      <div className="top">
-        <h2>{type} products</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate atque veritatis sit. Ea, omnis soluta in unde inventore earum porro! Itaque, eum obcaecati eligendi id porro, quam, error voluptates officiis blanditiis quidem vero molestias placeat? Cumque aliquam magni voluptas ab.</p>
-      </div>
-      <div className="bottom">
-        {data.map(item => (
-          <Card item={item} key={item.id} />
-        ))}
-      </div>
+    <div className='list'>
+      {data.map(item => (
+        <Card item={item} key={item.id} />
+      ))}
     </div>
   )
 }
 
-export default FeaturedProducts
+export default List
