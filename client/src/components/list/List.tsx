@@ -2,7 +2,13 @@ import React from 'react'
 import './List.scss'
 import Card from '../card/Card';
 
-function List() {
+interface ListProps {
+  catId: number;
+  maxPrice: number;
+  sort: string
+}
+
+function List({catId, maxPrice, sort}:ListProps) {
 
   const data = [
     {
