@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   CaretDown,
   Heart,
@@ -8,8 +8,12 @@ import {
 } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import './Navbar.scss'
+import Cart from '../cart/Cart';
 
 function Navbar() {
+
+  const [open, setOpen] = useState(false)
+
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -54,13 +58,15 @@ function Navbar() {
             <MagnifyingGlass size={20} />
             <User size={20} />
             <Heart size={20} />
-            <div className="cartIcon">
+            <div className="cartIcon" onClick={() => setOpen(!open)}>
               <ShoppingCartSimple size={20} />
               <span>0</span>
             </div>
           </div>
         </div>
       </div>
+
+      {open && <Cart />}
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Card from '../card/Card'
 import './FeaturedProducts.scss'
 
@@ -44,8 +45,16 @@ function FeaturedProducts({type}: FeaturedProps) {
     },
   ]
 
+  const [products, setProducts] = useState([])
+
+  const url: string = process.env.REACT_APP_API_URL!
+
+  console.log(url)
+
+
   return (
     <div className='featuredProducts'>
+
       <div className="top">
         <h2>{type} products</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate atque veritatis sit. Ea, omnis soluta in unde inventore earum porro! Itaque, eum obcaecati eligendi id porro, quam, error voluptates officiis blanditiis quidem vero molestias placeat? Cumque aliquam magni voluptas ab.</p>
