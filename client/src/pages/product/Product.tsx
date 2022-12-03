@@ -25,15 +25,22 @@ function Product() {
         </div>
       </div>
       <div className="right">
-        <h1>Title</h1>
-        <span>199</span>
-        <p>
+        <div className="top">
+        <h1>Just a high quality jeans</h1>
+        <span className='price'>
+          {new Intl.NumberFormat('pt-br', {
+            currency: 'BRL',
+            style: 'currency'
+          }).format(199)}
+        </span>
+        <p className='description'>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta
           dolorum corrupti optio architecto. Id, fugit sapiente sunt velit harum
           est vitae numquam repellendus officiis quae commodi quod facilis esse
           molestias sequi fugiat sed voluptates nostrum minus cumque omnis?
           Aliquid, vel!
         </p>
+        </div>
         <div className="quantity">
           <button
             onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
@@ -44,8 +51,8 @@ function Product() {
           <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
         </div>
 
-        <button>
-          <ShoppingCartSimple /> add to cart
+        <button className='addToCart'>
+          <ShoppingCartSimple size={22} /> add to cart
         </button>
         <div className="link">
           <div className="item">
