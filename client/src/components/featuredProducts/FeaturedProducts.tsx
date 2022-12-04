@@ -1,58 +1,37 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import Card from '../card/Card'
-import './FeaturedProducts.scss'
+import { useFetch } from '../../hooks/useFetch';
+import Card from '../card/Card';
+import './FeaturedProducts.scss';
 
 interface FeaturedProps {
-  type: string
+  type: string;
 }
 
-function FeaturedProducts({type}: FeaturedProps) {
-
-
-  async function getProducts() {
-    try {
-      const lala = await axios.get(import.meta.env.VITE_API_URL+'/products?populate=*', {
-        headers: {
-          Authorization: import.meta.env.VITE_API_TOKEN
-        }
-      })
-      console.log(lala.data.data)
-      setProducts(lala.data.data)
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getProducts()
-
-  }, [])
-
-
-
-  
-
-  const [products, setProducts] = useState([])
-
-  
-
+function FeaturedProducts({ type }: FeaturedProps) {
+  const { data, loading, error } = useFetch(
+    `/products?populate=*&[filters][type][$eq]=${type}`
+  );
 
   return (
-    <div className='featuredProducts'>
-
+    <div className="featuredProducts">
       <div className="top">
         <h2>{type} products</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate atque veritatis sit. Ea, omnis soluta in unde inventore earum porro! Itaque, eum obcaecati eligendi id porro, quam, error voluptates officiis blanditiis quidem vero molestias placeat? Cumque aliquam magni voluptas ab.</p>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+          atque veritatis sit. Ea, omnis soluta in unde inventore earum porro!
+          Itaque, eum obcaecati eligendi id porro, quam, error voluptates
+          officiis blanditiis quidem vero molestias placeat? Cumque aliquam
+          magni voluptas ab.
+        </p>
       </div>
       <div className="bottom">
-        {products.map(item => (
-          <Card item={item} />
-        ))}
+        {error
+          ? 'Deu ruim em algo...'
+          : loading
+          ? 'carregando dados'
+          : data.map((item, index) => <Card item={item} key={index} />)}
       </div>
     </div>
-  )
+  );
 }
 
-export default FeaturedProducts
+export default FeaturedProducts;
