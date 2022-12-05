@@ -3,15 +3,16 @@ import { useParams } from 'react-router-dom';
 import List from '../../components/list/List';
 import { useFetch } from '../../hooks/useFetch';
 import './Products.scss';
+import { useEffect } from 'react';
 
 function Products() {
   const catId = parseInt(useParams().id!);
 
-  const [maxPrice, setMaxPrice] = useState(1000);
+  const [maxPrice, setMaxPrice] = useState(500);
 
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState('asc');
 
-  const [selectedSubCategory, setSelectedSubCategory] = useState<any[]>([])
+  const [selectedSubCategory, setSelectedSubCategory] = useState<any[]>([]);
 
   const { data, loading, error } = useFetch(
     `/sub-categories?[filters][categories][id][$eq]=${catId}`
@@ -21,12 +22,14 @@ function Products() {
     const value = event.target.value;
     const isChecked = event.target.checked;
 
-    setSelectedSubCategory(isChecked
-      ? [...selectedSubCategory, value]
-      : selectedSubCategory.filter((item) => item !== value))
-  }
+    setSelectedSubCategory(
+      isChecked
+        ? [...selectedSubCategory, value]
+        : selectedSubCategory.filter((item) => item !== value)
+    );
+  };
 
-  console.log(selectedSubCategory)
+
 
   return (
     <div className="products">
@@ -35,24 +38,42 @@ function Products() {
           <h2>Product Categories</h2>
           {data.map((item: any) => (
             <div className="inputItem" key={item.id}>
-              <input type="checkbox" id={item.id} value={item.id} onChange={handleChange} />
+              <input
+                type="checkbox"
+                id={item.id}
+                value={item.id}
+                onChange={handleChange}
+              />
               <label htmlFor={item.id}>{item.attributes.title}</label>
             </div>
           ))}
         </div>
         <div className="filterItem">
           <h2>Filter by price</h2>
-          <div className="inputItem">
-            <span>0</span>
+          <div className="inputItem priceItem">
+            <span>
+              {new Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'brl',
+              }).format(0)}
+              
+            </span>
             <input
               type="range"
               name="range"
               id="range"
               min={0}
-              max={1000}
-              onChange={(event: any) => setMaxPrice(event.target.value)}
+              max={500}
+              defaultValue={500}
+              onMouseUp={(event: any) => setMaxPrice(event.target.value)}
             />
-            <span>{maxPrice}</span>
+            <span>
+              {new Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'brl',
+              }).format(maxPrice)}
+              
+            </span>
           </div>
         </div>
         <div className="filterItem">
@@ -85,7 +106,12 @@ function Products() {
           className="catImg"
           alt=""
         />
-        <List catId={catId} maxPrice={maxPrice} sort={sort} subCat={selectedSubCategory} />
+        <List
+          catId={catId}
+          maxPrice={maxPrice}
+          sort={sort}
+          subCat={selectedSubCategory}
+        />
       </div>
     </div>
   );
