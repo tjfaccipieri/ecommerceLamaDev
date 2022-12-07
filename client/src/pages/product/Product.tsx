@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import './Product.scss';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/cartReducer';
 
 function Product() {
   const [selectedImage, setSelectedImage] = useState('img');
@@ -13,7 +15,7 @@ function Product() {
 
   const { data, loading, error }: any = useFetch(`/products/${id}?populate=*`);
 
-  // console.log(data);
+  const dispatch = useDispatch()
 
   return (
     <div className="product">
@@ -23,12 +25,12 @@ function Product() {
         <>
           <div className="left">
             <div className="images">
-              <img src={import.meta.env.VITE_UPLOAD_URL + data?.attributes?.img?.data?.attributes?.url} alt="" onClick={() => setSelectedImage('img')} />
-          <img src={import.meta.env.VITE_UPLOAD_URL + data?.attributes?.img2?.data?.attributes?.url} alt="" onClick={() => setSelectedImage('img2')} />
+              <img src={ data?.attributes?.img?.data?.attributes?.url} alt="" onClick={() => setSelectedImage('img')} />
+          <img src={ data?.attributes?.img2?.data?.attributes?.url} alt="" onClick={() => setSelectedImage('img2')} />
             </div>
 
             <div className="mainImg">
-              <img src={import.meta.env.VITE_UPLOAD_URL +
+              <img src={
                   data?.attributes?.[selectedImage]?.data?.attributes?.url} alt="" />
             </div>
           </div>
@@ -57,7 +59,14 @@ function Product() {
               <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
             </div>
 
-            <button className="addToCart">
+            <button className="addToCart" onClick={() => dispatch(addToCart({
+              id: data.id,
+              title: data.attributes.title,
+              description: data.attributes.description,
+              price: data.attributes.price,
+              img: data.attributes.img.data.attributes.url,
+              quantity,
+            }))}>
               <ShoppingCartSimple size={22} /> add to cart
             </button>
             <div className="link">

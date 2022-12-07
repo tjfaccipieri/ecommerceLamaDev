@@ -12,8 +12,8 @@ function Card({ item }: CardProps) {
       <div className="card">
         <div className="image">
           {item?.attributes.isNew && <span>New Season</span>}
-          <img src={import.meta.env.VITE_UPLOAD_URL+item.attributes.img.data.attributes.url} alt="" className="mainImage" />
-          <img src={import.meta.env.VITE_UPLOAD_URL+item.attributes.img2.data?.attributes.url || import.meta.env.VITE_UPLOAD_URL+item.attributes.img.data.attributes.url} alt="" className="secondImage" />
+          <img src={item.attributes.img.data.attributes.url} alt="" className="mainImage" />
+          <img src={item.attributes.img2.data?.attributes.url || item.attributes.img.data.attributes.url} alt="" className="secondImage" />
         </div>
         <h2>{item?.attributes.title}</h2>
         <div className="prices">

@@ -4,6 +4,7 @@ import List from '../../components/list/List';
 import { useFetch } from '../../hooks/useFetch';
 import './Products.scss';
 import { useEffect } from 'react';
+import Banner from '../../components/banner/Banner';
 
 function Products() {
   const catId = parseInt(useParams().id!);
@@ -101,11 +102,7 @@ function Products() {
         </div>
       </div>
       <div className="right">
-        <img
-          src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          className="catImg"
-          alt=""
-        />
+        <Banner />
         <List
           catId={catId}
           maxPrice={maxPrice}

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import {
-  CaretDown,
-  Heart,
-  MagnifyingGlass,
-  ShoppingCartSimple,
-  User,
-} from 'phosphor-react';
+
 import { Link } from 'react-router-dom';
 import './Navbar.scss'
 import Cart from '../cart/Cart';
+import { useSelector } from 'react-redux';
+import { CaretDown, MagnifyingGlass, User, Heart, ShoppingCartSimple } from 'phosphor-react';
 
 function Navbar() {
-
+  const products = useSelector((state: any) => state.cart.products)
   const [open, setOpen] = useState(false)
 
   return (
@@ -60,7 +56,7 @@ function Navbar() {
             <Heart size={20} />
             <div className="cartIcon" onClick={() => setOpen(!open)}>
               <ShoppingCartSimple size={20} />
-              <span>0</span>
+              <span>{products.length}</span>
             </div>
           </div>
         </div>
